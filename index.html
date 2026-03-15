@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JANUS-X · Routeur intelligent pour LLM</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        /* Glassmorphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 100px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff, #a5b4fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav a {
+            color: #999;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav a:hover {
+            color: #fff;
+        }
+
+        .btn {
+            padding: 10px 24px;
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(102, 126, 234, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .btn-outline:hover {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            margin-bottom: 40px;
+        }
+
+        .hero h1 {
+            font-size: 72px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, #a5b4fc, #667eea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: #999;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        /* Main panel */
+        .main-panel {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        /* Chat */
+        .chat-panel {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 32px;
+            padding: 24px;
+        }
+
+        .messages {
+            height: 400px;
+            overflow-y: auto;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 24px;
+            margin-bottom: 20px;
+        }
+
+        .message {
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            border-radius: 20px;
+            max-width: 80%;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .user-message {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            margin-left: auto;
+        }
+
+        .bot-message {
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            margin-right: auto;
+        }
+
+        .message small {
+            display: block;
+            font-size: 10px;
+            opacity: 0.5;
+            margin-top: 5px;
+        }
+
+        .input-area {
+            display: flex;
+            gap: 10px;
+        }
+
+        .input-area input {
+            flex: 1;
+            padding: 16px 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 100px;
+            color: white;
+            font-size: 15px;
+            transition: all 0.2s;
+        }
+
+        .input-area input:focus {
+            outline: none;
+            border-color: #667eea;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .input-area input::placeholder {
+            color: #666;
+        }
+
+        .compare-area {
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 100px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .compare-area select {
+            flex: 1;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 100px;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Info panel */
+        .info-panel {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 32px;
+            padding: 24px;
+        }
+
+        .session-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .session-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .stat-item {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .decision-graph {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 24px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+        }
+
+        /* Features grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 60px 0;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 32px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #fff, #a5b4fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-card p {
+            color: #999;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* History */
+        .history-section {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 32px;
+            padding: 30px;
+            margin: 40px 0;
+        }
+
+        .history-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .history-item:last-child {
+            border-bottom: none;
+        }
+
+        .badge {
+            padding: 6px 12px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge-droit { background: #6f42c1; color: white; }
+        .badge-code { background: #28a745; color: white; }
+        .badge-general { background: #17a2b8; color: white; }
+
+        /* Pricing */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 60px 0;
+        }
+
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 32px;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .pricing-card.featured {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+            border: 1px solid #667eea;
+        }
+
+        .price {
+            font-size: 48px;
+            font-weight: 700;
+            margin: 20px 0;
+            color: #fff;
+        }
+
+        .price small {
+            font-size: 14px;
+            color: #999;
+        }
+
+        .features-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .features-list li {
+            padding: 10px 0;
+            color: #999;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .features-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Community */
+        .community-section {
+            text-align: center;
+            padding: 80px 20px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 32px;
+            margin: 40px 0;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .social-link {
+            padding: 15px 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 100px;
+            text-decoration: none;
+            color: white;
+            transition: all 0.2s;
+        }
+
+        .social-link:hover {
+            background: #667eea;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer a {
+            color: #999;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .footer a:hover {
+            color: #fff;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 48px; }
+            .main-panel { grid-template-columns: 1fr; }
+            .features-grid { grid-template-columns: 1fr; }
+            .pricing-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">JANUS-X</div>
+            <nav class="nav">
+                <a href="#">Documentation</a>
+                <a href="#">GitHub</a>
+                <button class="btn btn-outline">Se connecter</button>
+                <button class="btn btn-primary">Console</button>
+            </nav>
+        </header>
+
+        <!-- Hero -->
+        <section class="hero">
+            <h1>Routeur intelligent pour LLM</h1>
+            <p>Audit trail immuable · Routage temps réel · Mémoire collective · Open source</p>
+            <button class="btn btn-primary" style="padding: 16px 40px; font-size: 16px;">Démarrer maintenant</button>
+        </section>
+
+        <!-- Main Panel -->
+        <div class="main-panel">
+            <!-- Chat -->
+            <div class="chat-panel">
+                <div class="messages" id="messages">
+                    <div class="message bot-message">
+                        Bonjour ! Je suis JANUS-X. Posez votre question, je choisirai le meilleur modèle parmi 62 LLM.
+                        <small>🤖 Système · À l'instant</small>
+                    </div>
+                </div>
+
+                <div class="input-area">
+                    <input type="text" id="userInput" placeholder="Posez votre question..." onkeypress="if(event.key==='Enter') sendMessage()">
+                    <button class="btn btn-primary" onclick="sendMessage()">Envoyer</button>
+                </div>
+
+                <div class="compare-area">
+                    <span style="color: #999;">🤔 Comparer avec :</span>
+                    <select id="modelSelect">
+                        <option value="gpt4">GPT-4</option>
+                        <option value="claude">Claude</option>
+                        <option value="mistral">Mistral</option>
+                        <option value="llama">Llama 3</option>
+                    </select>
+                    <button class="btn btn-outline" onclick="compareModel()">Voir différence</button>
+                </div>
+            </div>
+
+            <!-- Info Panel -->
+            <div class="info-panel">
+                <div class="session-card">
+                    <h3 style="margin-bottom: 15px;">📊 Session en cours</h3>
+                    <div class="session-stats">
+                        <div class="stat-item">
+                            <div class="stat-value" id="theme-actuel">droit</div>
+                            <div class="stat-label">Thème</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="modele-actuel">SaulLM</div>
+                            <div class="stat-label">Modèle</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="score-actuel">98%</div>
+                            <div class="stat-label">Score</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">1.2s</div>
+                            <div class="stat-label">Temps</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">0.3g</div>
+                            <div class="stat-label">CO₂</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">3</div>
+                            <div class="stat-label">Requêtes</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 style="margin-bottom: 15px;">🧠 Décision</h3>
+                <div class="decision-graph" id="decisionGraph">
+                    <div style="text-align: left;">
+                        <div style="margin-bottom: 10px;">🔹 Langue: <span style="color: #667eea;">0.95</span></div>
+                        <div style="margin-bottom: 10px;">🔹 Thème: <span style="color: #667eea;">0.99</span></div>
+                        <div style="margin-bottom: 10px;">🔹 Complexité: <span style="color: #667eea;">0.85</span></div>
+                        <div style="font-weight: 700;">→ Score: <span style="color: #667eea;">0.98</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features -->
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <h3>Audit Trail</h3>
+                <p>Toutes les actions sont tracées de manière immuable avec hash cryptographique. Preuve pour audits RGPD.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🧠</div>
+                <h3>Mémoire collective</h3>
+                <p>Apprend des requêtes passées pour améliorer le routage. Base SQLite intégrée.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Routage temps réel</h3>
+                <p>Analyse multi-dimensionnelle (langue, thème, complexité) pour choisir le meilleur modèle.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔄</div>
+                <h3>Mode inversion</h3>
+                <p>Comparez les réponses de deux modèles côte à côte pour choisir le meilleur.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Graphe de décision</h3>
+                <p>Visualisez pourquoi un modèle a été choisi : critères, poids, score.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💡</div>
+                <h3>Prompts optimisés</h3>
+                <p>Génération automatique de prompts système adaptés à chaque modèle.</p>
+            </div>
+        </div>
+
+        <!-- History -->
+        <div class="history-section">
+            <h2 style="margin-bottom: 30px;">📋 Dernières requêtes</h2>
+            <div class="history-item">
+                <div style="display: flex; gap: 15px; align-items: center;">
+                    <span class="badge badge-droit">droit</span>
+                    <span><strong>SaulLM</strong> · 98%</span>
+                </div>
+                <div style="display: flex; gap: 20px; align-items: center;">
+                    <span>⏱️ 1.2s</span>
+                    <span>🌍 0.3g</span>
+                    <button class="btn btn-outline" style="padding: 5px 15px;">🔍 Détail</button>
+                </div>
+            </div>
+            <div class="history-item">
+                <div style="display: flex; gap: 15px; align-items: center;">
+                    <span class="badge badge-code">code</span>
+                    <span><strong>DeepSeek</strong> · 95%</span>
+                </div>
+                <div style="display: flex; gap: 20px; align-items: center;">
+                    <span>⏱️ 1.5s</span>
+                    <span>🌍 0.5g</span>
+                    <button class="btn btn-outline" style="padding: 5px 15px;">🔍 Détail</button>
+                </div>
+            </div>
+            <div class="history-item">
+                <div style="display: flex; gap: 15px; align-items: center;">
+                    <span class="badge badge-general">général</span>
+                    <span><strong>Mistral</strong> · 87%</span>
+                </div>
+                <div style="display: flex; gap: 20px; align-items: center;">
+                    <span>⏱️ 0.8s</span>
+                    <span>🌍 0.2g</span>
+                    <button class="btn btn-outline" style="padding: 5px 15px;">🔍 Détail</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pricing -->
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3>Open Source</h3>
+                <div class="price">Gratuit</div>
+                <ul class="features-list">
+                    <li>✅ Audit trail basique</li>
+                    <li>✅ 5 règles max</li>
+                    <li>❌ Mémoire collective</li>
+                    <li>❌ Mode inversion</li>
+                    <li>📱 Support communauté</li>
+                </ul>
+                <button class="btn btn-outline">GitHub</button>
+            </div>
+            <div class="pricing-card featured">
+                <h3>Pro</h3>
+                <div class="price">5k€<small>/an</small></div>
+                <ul class="features-list">
+                    <li>✅ Audit trail avancé</li>
+                    <li>✅ Règles illimitées</li>
+                    <li>✅ Mémoire collective</li>
+                    <li>✅ Mode inversion</li>
+                    <li>📧 Support email</li>
+                </ul>
+                <button class="btn btn-primary">Acheter</button>
+            </div>
+            <div class="pricing-card">
+                <h3>Enterprise</h3>
+                <div class="price">15k€<small>/an</small></div>
+                <ul class="features-list">
+                    <li>✅ Tout Pro</li>
+                    <li>✅ Blockchain</li>
+                    <li>✅ Support 24/7</li>
+                    <li>✅ Déploiement accompagné</li>
+                    <li>📞 Account manager</li>
+                </ul>
+                <button class="btn btn-outline">Contact</button>
+            </div>
+        </div>
+
+        <!-- Community -->
+        <div class="community-section">
+            <h2>💬 Rejoindre la communauté</h2>
+            <p style="color: #999; margin-top: 20px;">Des milliers de développeurs construisent avec JANUS-X</p>
+            <div class="social-links">
+                <a href="#" class="social-link">Discord</a>
+                <a href="#" class="social-link">Twitter</a>
+                <a href="#" class="social-link">GitHub</a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>© 2026 JANUS-X · Open source · Transparent · Sans lock-in</p>
+            <p style="margin-top: 10px;">
+                <a href="#">Documentation</a> · 
+                <a href="#">GitHub</a> · 
+                <a href="#">Contact</a>
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        async function sendMessage() {
+            const input = document.getElementById('userInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+
+            addMessage('user', message);
+            input.value = '';
+
+            try {
+                // 🌐 APPEL À L'API - TON ADRESSE
+                const response = await fetch('https://upgraded-cod-7vqwqjrgj5yj3ww6q-8000.app.github.dev/api/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        texte: message,
+                        user_id: 'user_' + Date.now()
+                    })
+                });
+
+                const data = await response.json();
+                
+                addMessage('bot', data.reponse || 'Réponse reçue');
+                
+                if (data.decision_routage) {
+                    updateDecisionGraph(data.decision_routage);
+                }
+                
+                if (data.analyse) {
+                    document.getElementById('theme-actuel').textContent = data.analyse.theme_principal || 'général';
+                    document.getElementById('modele-actuel').textContent = data.modele_utilise?.nom || 'Mistral';
+                    document.getElementById('score-actuel').textContent = data.decision_routage?.score 
+                        ? Math.round(data.decision_routage.score * 100) + '%' 
+                        : '95%';
+                }
+                
+            } catch (error) {
+                console.error('Erreur:', error);
+                addMessage('bot', '❌ Erreur de connexion au serveur');
+            }
+        }
+
+        function addMessage(role, content) {
+            const messages = document.getElementById('messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${role === 'user' ? 'user-message' : 'bot-message'}`;
+            messageDiv.innerHTML = content + `<small>${role === 'user' ? '👤 Vous' : '🤖 JANUS-X'} · À l'instant</small>`;
+            messages.appendChild(messageDiv);
+            messages.scrollTop = messages.scrollHeight;
+        }
+
+        function updateDecisionGraph(decision) {
+            const graph = document.getElementById('decisionGraph');
+            graph.innerHTML = `
+                <div style="text-align: left;">
+                    <div style="margin-bottom: 10px;">🔹 Langue: <span style="color: #667eea;">0.95</span></div>
+                    <div style="margin-bottom: 10px;">🔹 Thème: <span style="color: #667eea;">0.99</span></div>
+                    <div style="margin-bottom: 10px;">🔹 Complexité: <span style="color: #667eea;">0.85</span></div>
+                    <div style="font-weight: 700;">→ Score: <span style="color: #667eea;">${(decision.score * 100).toFixed(0)}%</span></div>
+                </div>
+            `;
+        }
+
+        function compareModel() {
+            const model = document.getElementById('modelSelect').value;
+            addMessage('bot', `🔍 Comparaison avec ${model} - Fonctionnalité à venir`);
+        }
+    </script>
+</body>
+</html>
