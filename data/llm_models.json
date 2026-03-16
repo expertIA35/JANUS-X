@@ -1,0 +1,622 @@
+{
+  "mistral-7b": {
+    "nom": "Mistral 7B",
+    "pays": "France",
+    "taille_gb": 4.1,
+    "ram_requise": 8,
+    "langues": ["fr", "en", "es", "de", "it"],
+    "specialites": ["general", "conversation", "creatif"],
+    "scores": {"fr": 0.98, "general": 0.95, "code": 0.65, "math": 0.70, "droit": 0.60},
+    "vitesse": 45
+  },
+  "mixtral-8x7b": {
+    "nom": "Mixtral 8x7B",
+    "pays": "France",
+    "taille_gb": 45,
+    "ram_requise": 90,
+    "langues": ["fr", "en", "es", "de", "it"],
+    "specialites": ["general", "expert", "raisonnement"],
+    "scores": {"fr": 0.99, "general": 0.98, "raisonnement": 0.97},
+    "vitesse": 25
+  },
+  "croissant-1.3b": {
+    "nom": "CroissantLLM",
+    "pays": "France",
+    "taille_gb": 1.3,
+    "ram_requise": 3,
+    "langues": ["fr", "en"],
+    "specialites": ["leger", "education", "rapide"],
+    "scores": {"fr": 0.85, "general": 0.75, "leger": 0.99},
+    "vitesse": 120
+  },
+  "vigogne-7b": {
+    "nom": "Vigogne",
+    "pays": "France",
+    "taille_gb": 4.0,
+    "ram_requise": 8,
+    "langues": ["fr"],
+    "specialites": ["conversation", "assistant"],
+    "scores": {"fr": 0.95, "conversation": 0.96},
+    "vitesse": 40
+  },
+  "saullm-7b": {
+    "nom": "SaulLM",
+    "pays": "France",
+    "taille_gb": 4.0,
+    "ram_requise": 8,
+    "langues": ["fr", "en"],
+    "specialites": ["droit", "juridique", "legal"],
+    "scores": {"fr": 0.97, "droit": 0.99, "legal": 0.99},
+    "vitesse": 38
+  },
+  "starcoder-3b": {
+    "nom": "StarCoder",
+    "pays": "France",
+    "taille_gb": 1.8,
+    "ram_requise": 4,
+    "langues": ["en"],
+    "specialites": ["code", "leger"],
+    "scores": {"code": 0.89, "leger": 0.98},
+    "vitesse": 95
+  },
+  "llama-3.1-8b": {
+    "nom": "Llama 3.1 8B",
+    "pays": "USA",
+    "taille_gb": 4.5,
+    "ram_requise": 10,
+    "langues": ["en", "fr", "es", "de", "zh"],
+    "specialites": ["general", "multilingue"],
+    "scores": {"fr": 0.82, "general": 0.94, "code": 0.75, "multilingue": 0.92},
+    "vitesse": 35
+  },
+  "llama-3.1-70b": {
+    "nom": "Llama 3.1 70B",
+    "pays": "USA",
+    "taille_gb": 40,
+    "ram_requise": 80,
+    "langues": ["en", "fr", "es", "de", "zh"],
+    "specialites": ["general", "expert"],
+    "scores": {"fr": 0.88, "general": 0.98, "code": 0.85, "raisonnement": 0.96},
+    "vitesse": 18
+  },
+  "llama-3.2-3b": {
+    "nom": "Llama 3.2 3B",
+    "pays": "USA",
+    "taille_gb": 2.0,
+    "ram_requise": 6,
+    "langues": ["en", "fr", "es"],
+    "specialites": ["leger", "rapide"],
+    "scores": {"fr": 0.75, "general": 0.80, "leger": 0.95},
+    "vitesse": 85
+  },
+  "llama-3.2-11b": {
+    "nom": "Llama 3.2 11B",
+    "pays": "USA",
+    "taille_gb": 6.5,
+    "ram_requise": 14,
+    "langues": ["en", "fr", "es"],
+    "specialites": ["vision", "texte", "multimodal"],
+    "scores": {"fr": 0.80, "vision": 0.92, "multimodal": 0.90},
+    "vitesse": 30
+  },
+  "phi-3-mini": {
+    "nom": "Phi-3 Mini",
+    "pays": "USA",
+    "taille_gb": 1.8,
+    "ram_requise": 4,
+    "langues": ["en"],
+    "specialites": ["leger", "raisonnement"],
+    "scores": {"raisonnement": 0.88, "leger": 0.97},
+    "vitesse": 100
+  },
+  "phi-3-medium": {
+    "nom": "Phi-3 Medium",
+    "pays": "USA",
+    "taille_gb": 4.0,
+    "ram_requise": 8,
+    "langues": ["en"],
+    "specialites": ["raisonnement", "logique"],
+    "scores": {"raisonnement": 0.97, "math": 0.92, "logique": 0.96},
+    "vitesse": 42
+  },
+  "phi-3-vision": {
+    "nom": "Phi-3 Vision",
+    "pays": "USA",
+    "taille_gb": 4.2,
+    "ram_requise": 9,
+    "langues": ["en"],
+    "specialites": ["vision", "multimodal"],
+    "scores": {"vision": 0.90, "multimodal": 0.88},
+    "vitesse": 35
+  },
+  "gemma-2b": {
+    "nom": "Gemma 2B",
+    "pays": "USA",
+    "taille_gb": 1.6,
+    "ram_requise": 4,
+    "langues": ["en", "fr", "es"],
+    "specialites": ["leger", "equilibre"],
+    "scores": {"fr": 0.70, "general": 0.75, "leger": 0.96},
+    "vitesse": 110
+  },
+  "gemma-7b": {
+    "nom": "Gemma 7B",
+    "pays": "USA",
+    "taille_gb": 4.0,
+    "ram_requise": 8,
+    "langues": ["en", "fr", "es"],
+    "specialites": ["equilibre", "general"],
+    "scores": {"fr": 0.78, "general": 0.88},
+    "vitesse": 48
+  },
+  "qwen-2.5-7b": {
+    "nom": "Qwen 2.5 7B",
+    "pays": "Chine",
+    "taille_gb": 4.0,
+    "ram_requise": 8,
+    "langues": ["zh", "en", "fr", "ja", "ko"],
+    "specialites": ["multilingue", "general"],
+    "scores": {"fr": 0.72, "general": 0.87, "multilingue": 0.94},
+    "vitesse": 44
+  },
+  "qwen-2.5-32b": {
+    "nom": "Qwen 2.5 32B",
+    "pays": "Chine",
+    "taille_gb": 18,
+    "ram_requise": 36,
+    "langues": ["zh", "en", "fr", "ja", "ko"],
+    "specialites": ["multilingue", "expert"],
+    "scores": {"fr": 0.78, "general": 0.92, "multilingue": 0.96},
+    "vitesse": 22
+  },
+  "qwen-2.5-72b": {
+    "nom": "Qwen 2.5 72B",
+    "pays": "Chine",
+    "taille_gb": 42,
+    "ram_requise": 84,
+    "langues": ["zh", "en", "fr", "ja", "ko"],
+    "specialites": ["multilingue", "expert"],
+    "scores": {"fr": 0.82, "general": 0.95, "multilingue": 0.98},
+    "vitesse": 15
+  },
+  "deepseek-coder-6.7b": {
+    "nom": "DeepSeek Coder 6.7B",
+    "pays": "Chine",
+    "taille_gb": 4.0,
+    "ram_requise": 8,
+    "langues": ["en", "zh"],
+    "specialites": ["code", "programmation"],
+    "scores": {"code": 0.99, "python": 0.99, "java": 0.98, "js": 0.98},
+    "vitesse": 46
+  },
+  "deepseek-coder-33b": {
+    "nom": "DeepSeek Coder 33B",
+    "pays": "Chine",
+    "taille_gb": 20,
+    "ram_requise": 40,
+    "langues": ["en", "zh"],
+    "specialites": ["code", "expert"],
+    "scores": {"code": 0.99, "python": 0.99, "java": 0.99},
+    "vitesse": 25
+  },
+  "deepseek-math-7b": {
+    "nom": "DeepSeek Math 7B",
+    "pays": "Chine",
+    "taille_gb": 4.0,
+    "ram_requise": 8,
+    "langues": ["en"],
+    "specialites": ["math", "equations"],
+    "scores": {"math": 0.99, "calcul": 0.99, "algebre": 0.98},
+    "vitesse": 45
+  },
+  "deepseek-v2": {
+    "nom": "DeepSeek V2",
+    "pays": "Chine",
+    "taille_gb": 42,
+    "ram_requise": 84,
+    "langues": ["en", "zh"],
+    "specialites": ["general", "expert"],
+    "scores": {"general": 0.96, "code": 0.92, "math": 0.90},
+    "vitesse": 20
+  },
+  "falcon-7b": {
+    "nom": "Falcon 7B",
+    "pays": "UAE",
+    "taille_gb": 4.0,
+    "ram_requise": 8,
+    "langues": ["en", "ar"],
+    "specialites": ["general", "academique"],
+    "scores": {"general": 0.86},
+    "vitesse": 41
+  },
+  "falcon-40b": {
+    "nom": "Falcon 40B",
+    "pays": "UAE",
+    "taille_gb": 40,
+    "ram_requise": 80,
+    "langues": ["en", "ar"],
+    "specialites": ["general", "expert"],
+    "scores": {"general": 0.92},
+    "vitesse": 18
+  },
+  "bloom-7b": {
+    "nom": "BLOOM 7B",
+    "pays": "Europe",
+    "taille_gb": 4.0,
+    "ram_requise": 8,
+    "langues": ["en", "fr", "es", "de", "ar", "zh"],
+    "specialites": ["multilingue", "recherche"],
+    "scores": {"fr": 0.81, "multilingue": 0.96},
+    "vitesse": 37
+  },
+  "bloom-176b": {
+    "nom": "BLOOM 176B",
+    "pays": "Europe",
+    "taille_gb": 100,
+    "ram_requise": 200,
+    "langues": ["en", "fr", "es", "de", "ar", "zh"],
+    "specialites": ["multilingue", "expert"],
+    "scores": {"fr": 0.88, "multilingue": 0.98},
+    "vitesse": 8
+  },
+  "eurollm-7b": {
+    "nom": "EuroLLM 7B",
+    "pays": "Europe",
+    "taille_gb": 4.0,
+    "ram_requise": 8,
+    "langues": ["en", "fr", "de", "es", "it", "nl"],
+    "specialites": ["europeen"],
+    "scores": {"fr": 0.79, "europeen": 0.93},
+    "vitesse": 39
+  },
+  "elyza-7b": {
+    "nom": "ELYZA 7B",
+    "pays": "Japon",
+    "taille_gb": 4.0,
+    "ram_requise": 8,
+    "langues": ["ja", "en"],
+    "specialites": ["japonais"],
+    "scores": {"ja": 0.97, "general": 0.82},
+    "vitesse": 40
+  },
+  "polyglot-5.8b": {
+    "nom": "Polyglot 5.8B",
+    "pays": "Corée",
+    "taille_gb": 3.5,
+    "ram_requise": 7,
+    "langues": ["ko", "en"],
+    "specialites": ["coreen"],
+    "scores": {"ko": 0.96, "general": 0.78},
+    "vitesse": 43
+  },
+  "saiga-7b": {
+    "nom": "Saiga 7B",
+    "pays": "Russie",
+    "taille_gb": 4.0,
+    "ram_requise": 8,
+    "langues": ["ru", "en"],
+    "specialites": ["russe"],
+    "scores": {"ru": 0.95, "general": 0.75},
+    "vitesse": 41
+  },
+  "biomistral-7b": {
+    "nom": "BioMistral",
+    "pays": "Canada",
+    "taille_gb": 4.1,
+    "ram_requise": 8,
+    "langues": ["en", "fr"],
+    "specialites": ["medical", "biologie", "sante"],
+    "scores": {"fr": 0.88, "medical": 0.97, "biologie": 0.96},
+    "vitesse": 38
+  },
+  "meditron-7b": {
+    "nom": "Meditron",
+    "pays": "Allemagne",
+    "taille_gb": 4.2,
+    "ram_requise": 9,
+    "langues": ["en"],
+    "specialites": ["medical", "clinique"],
+    "scores": {"medical": 0.96, "clinique": 0.95},
+    "vitesse": 36
+  },
+  "lemmas-7b": {
+    "nom": "Llemma 7B",
+    "pays": "USA",
+    "taille_gb": 4.2,
+    "ram_requise": 9,
+    "langues": ["en"],
+    "specialites": ["math", "theoremes"],
+    "scores": {"math": 0.98, "theoreme": 0.97},
+    "vitesse": 35
+  },
+  "lemmas-34b": {
+    "nom": "Llemma 34B",
+    "pays": "USA",
+    "taille_gb": 20,
+    "ram_requise": 40,
+    "langues": ["en"],
+    "specialites": ["math", "theoremes", "expert"],
+    "scores": {"math": 0.99, "theoreme": 0.98},
+    "vitesse": 20
+  },
+  "galactica-6.7b": {
+    "nom": "Galactica",
+    "pays": "USA",
+    "taille_gb": 4.0,
+    "ram_requise": 8,
+    "langues": ["en"],
+    "specialites": ["science", "recherche", "academique"],
+    "scores": {"science": 0.95, "recherche": 0.94},
+    "vitesse": 39
+  },
+  "galactica-30b": {
+    "nom": "Galactica 30B",
+    "pays": "USA",
+    "taille_gb": 18,
+    "ram_requise": 36,
+    "langues": ["en"],
+    "specialites": ["science", "recherche", "academique"],
+    "scores": {"science": 0.97, "recherche": 0.96},
+    "vitesse": 22
+  },
+  "fingpt-7b": {
+    "nom": "FinGPT",
+    "pays": "USA",
+    "taille_gb": 4.0,
+    "ram_requise": 8,
+    "langues": ["en"],
+    "specialites": ["finance", "business", "investissement"],
+    "scores": {"finance": 0.96, "business": 0.94},
+    "vitesse": 40
+  },
+  "wizardcoder-7b": {
+    "nom": "WizardCoder",
+    "pays": "USA",
+    "taille_gb": 4.0,
+    "ram_requise": 8,
+    "langues": ["en"],
+    "specialites": ["code", "python"],
+    "scores": {"code": 0.95, "python": 0.97},
+    "vitesse": 42
+  },
+  "wizardcoder-15b": {
+    "nom": "WizardCoder 15B",
+    "pays": "USA",
+    "taille_gb": 9,
+    "ram_requise": 18,
+    "langues": ["en"],
+    "specialites": ["code", "expert"],
+    "scores": {"code": 0.97, "python": 0.98},
+    "vitesse": 28
+  },
+  "codellama-7b": {
+    "nom": "CodeLlama 7B",
+    "pays": "USA",
+    "taille_gb": 4.0,
+    "ram_requise": 8,
+    "langues": ["en"],
+    "specialites": ["code"],
+    "scores": {"code": 0.92},
+    "vitesse": 43
+  },
+  "codellama-34b": {
+    "nom": "CodeLlama 34B",
+    "pays": "USA",
+    "taille_gb": 20,
+    "ram_requise": 40,
+    "langues": ["en"],
+    "specialites": ["code", "expert"],
+    "scores": {"code": 0.96},
+    "vitesse": 22
+  },
+  "codellama-70b": {
+    "nom": "CodeLlama 70B",
+    "pays": "USA",
+    "taille_gb": 42,
+    "ram_requise": 84,
+    "langues": ["en"],
+    "specialites": ["code", "expert"],
+    "scores": {"code": 0.98},
+    "vitesse": 16
+  },
+  "zephyr-7b": {
+    "nom": "Zephyr 7B",
+    "pays": "USA",
+    "taille_gb": 4.0,
+    "ram_requise": 8,
+    "langues": ["en"],
+    "specialites": ["assistant", "conversation"],
+    "scores": {"conversation": 0.94, "assistant": 0.95},
+    "vitesse": 44
+  },
+  "neuralchat-7b": {
+    "nom": "NeuralChat",
+    "pays": "USA",
+    "taille_gb": 4.0,
+    "ram_requise": 8,
+    "langues": ["en"],
+    "specialites": ["chat", "dialogue"],
+    "scores": {"chat": 0.92, "dialogue": 0.91},
+    "vitesse": 41
+  },
+  "orca-2-7b": {
+    "nom": "Orca 2 7B",
+    "pays": "USA",
+    "taille_gb": 4.0,
+    "ram_requise": 8,
+    "langues": ["en"],
+    "specialites": ["raisonnement"],
+    "scores": {"raisonnement": 0.93},
+    "vitesse": 40
+  },
+  "orca-2-13b": {
+    "nom": "Orca 2 13B",
+    "pays": "USA",
+    "taille_gb": 7.5,
+    "ram_requise": 15,
+    "langues": ["en"],
+    "specialites": ["raisonnement"],
+    "scores": {"raisonnement": 0.95},
+    "vitesse": 30
+  },
+  "yi-6b": {
+    "nom": "Yi 6B",
+    "pays": "Chine",
+    "taille_gb": 3.5,
+    "ram_requise": 7,
+    "langues": ["en", "zh"],
+    "specialites": ["general"],
+    "scores": {"general": 0.85},
+    "vitesse": 50
+  },
+  "yi-34b": {
+    "nom": "Yi 34B",
+    "pays": "Chine",
+    "taille_gb": 20,
+    "ram_requise": 40,
+    "langues": ["en", "zh"],
+    "specialites": ["general", "puissant"],
+    "scores": {"general": 0.93},
+    "vitesse": 24
+  },
+  "baichuan-7b": {
+    "nom": "Baichuan 7B",
+    "pays": "Chine",
+    "taille_gb": 4.0,
+    "ram_requise": 8,
+    "langues": ["en", "zh"],
+    "specialites": ["general"],
+    "scores": {"general": 0.86},
+    "vitesse": 42
+  },
+  "baichuan-13b": {
+    "nom": "Baichuan 13B",
+    "pays": "Chine",
+    "taille_gb": 7.5,
+    "ram_requise": 15,
+    "langues": ["en", "zh"],
+    "specialites": ["general"],
+    "scores": {"general": 0.90},
+    "vitesse": 32
+  },
+  "aquila-7b": {
+    "nom": "Aquila 7B",
+    "pays": "Chine",
+    "taille_gb": 4.0,
+    "ram_requise": 8,
+    "langues": ["en", "zh"],
+    "specialites": ["general"],
+    "scores": {"general": 0.84},
+    "vitesse": 41
+  },
+  "internlm-7b": {
+    "nom": "InternLM 7B",
+    "pays": "Chine",
+    "taille_gb": 4.0,
+    "ram_requise": 8,
+    "langues": ["en", "zh"],
+    "specialites": ["general"],
+    "scores": {"general": 0.87},
+    "vitesse": 43
+  },
+  "internlm-20b": {
+    "nom": "InternLM 20B",
+    "pays": "Chine",
+    "taille_gb": 12,
+    "ram_requise": 24,
+    "langues": ["en", "zh"],
+    "specialites": ["general", "puissant"],
+    "scores": {"general": 0.91},
+    "vitesse": 26
+  },
+  "skywork-13b": {
+    "nom": "Skywork 13B",
+    "pays": "Chine",
+    "taille_gb": 7.5,
+    "ram_requise": 15,
+    "langues": ["en", "zh"],
+    "specialites": ["general"],
+    "scores": {"general": 0.89},
+    "vitesse": 34
+  },
+  "telechat-7b": {
+    "nom": "TeleChat",
+    "pays": "Chine",
+    "taille_gb": 4.0,
+    "ram_requise": 8,
+    "langues": ["zh", "en"],
+    "specialites": ["chat"],
+    "scores": {"chat": 0.90},
+    "vitesse": 40
+  },
+  "bluelm-7b": {
+    "nom": "BlueLM",
+    "pays": "Chine",
+    "taille_gb": 4.0,
+    "ram_requise": 8,
+    "langues": ["zh", "en"],
+    "specialites": ["general"],
+    "scores": {"general": 0.86},
+    "vitesse": 42
+  },
+  "crystalchat-7b": {
+    "nom": "CrystalChat",
+    "pays": "USA",
+    "taille_gb": 4.0,
+    "ram_requise": 8,
+    "langues": ["en"],
+    "specialites": ["chat"],
+    "scores": {"chat": 0.91},
+    "vitesse": 41
+  },
+  "tinyllama-1.1b": {
+    "nom": "TinyLlama 1.1B",
+    "pays": "USA",
+    "taille_gb": 0.6,
+    "ram_requise": 2,
+    "langues": ["en"],
+    "specialites": ["ultra-leger"],
+    "scores": {"leger": 0.99, "general": 0.60},
+    "vitesse": 200
+  },
+  "mobilellm-1.4b": {
+    "nom": "MobileLLM 1.4B",
+    "pays": "USA",
+    "taille_gb": 0.8,
+    "ram_requise": 2,
+    "langues": ["en"],
+    "specialites": ["mobile"],
+    "scores": {"leger": 0.98, "mobile": 0.95},
+    "vitesse": 180
+  },
+  "smollm-135m": {
+    "nom": "SmolLM 135M",
+    "pays": "USA",
+    "taille_gb": 0.1,
+    "ram_requise": 0.5,
+    "langues": ["en"],
+    "specialites": ["miniature"],
+    "scores": {"leger": 1.0, "general": 0.40},
+    "vitesse": 500
+  },
+  "smollm-360m": {
+    "nom": "SmolLM 360M",
+    "pays": "USA",
+    "taille_gb": 0.2,
+    "ram_requise": 1,
+    "langues": ["en"],
+    "specialites": ["miniature"],
+    "scores": {"leger": 1.0, "general": 0.50},
+    "vitesse": 400
+  },
+  "smollm-1.7b": {
+    "nom": "SmolLM 1.7B",
+    "pays": "USA",
+    "taille_gb": 1.0,
+    "ram_requise": 3,
+    "langues": ["en"],
+    "specialites": ["leger"],
+    "scores": {"leger": 0.98, "general": 0.70},
+    "vitesse": 150
+  }
+}
