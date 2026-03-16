@@ -6,16 +6,16 @@
 
 ---
 
-## ✨ Fonctionnalités
+##  Fonctionnalités
 
-- 🧠 Routage intelligent (62 modèles, analyse en temps réel)
-- ⚡ Vrais modèles en local (Mistral, Llama, Phi, Gemma)
-- 📊 Interface moderne avec chat et statistiques
-- 🔒 Open source, transparent, sans lock-in
+-  Routage intelligent (62 modèles, analyse en temps réel)
+-  Vrais modèles en local (Mistral, Llama, Phi, Gemma)
+-  Interface moderne avec chat et statistiques
+-  Open source, transparent, sans lock-in
 
 ---
 
-## 🚀 Installation en 1 commande
+##  Installation en 1 commande
 
 ```bash
 git clone https://github.com/expertIA35/JANUS-X.git
@@ -23,11 +23,11 @@ cd JANUS-X
 ./install.sh
 
 
-## 🧠 Routage intelligent (PPCA)
+##  Routage intelligent (PPCA)
 
 **JANUS-X** utilise un algorithme unique appelé **PPCA** (Proportional Cognitive Routing) pour choisir le meilleur modèle à chaque question.
 
-### 🔍 Comment ça marche ?
+###  Comment ça marche ?
 
 1. **Analyse de la requête**  
    Pour chaque question, le système analyse :
@@ -54,7 +54,7 @@ cd JANUS-X
 | "Explique la relativité" | science | **Mistral** (France) | 92% |
 | "Bonjour" | conversation | **Mistral** (France) | 98% |
 
-### 🏆 Pourquoi PPCA est unique
+###  Pourquoi PPCA est unique
 
 - ✅ **Temps réel** : analyse en moins de 0.1 seconde
 - ✅ **Multi-dimensionnel** : prend en compte plusieurs critères
@@ -63,13 +63,13 @@ cd JANUS-X
 
  UTILITÉ DE JANUS-X
 Pour qui ?
-🏢 Entreprises : sécuriser et optimiser l'usage des LLM
+ Entreprises : sécuriser et optimiser l'usage des LLM
 
-👨‍💻 Développeurs : tester et comparer des modèles
+ Développeurs : tester et comparer des modèles
 
-🎓 Chercheurs : analyser les performances des LLM
+ Chercheurs : analyser les performances des LLM
 
-🏠 Particuliers : utiliser l'IA en local, gratuitement
+ Particuliers : utiliser l'IA en local, gratuitement
 
 Cas d'usage concrets
 Domaine	Exemple	Modèle utilisé
@@ -104,7 +104,7 @@ Installation	Nécessite des compétences techniques	Version SaaS
 Espace disque	15-20 Go pour les modèles de base	Streaming de modèles
 Mise à jour	Manuelle pour l'instant	Auto-update
 📜 LICENCE
-Projet principal : MIT ✅
+Projet principal : MIT 
 text
 MIT License
 
@@ -154,7 +154,7 @@ SaulLM	MIT	✅ Utilisation libre
 BioMistral	Apache 2.0	✅ Utilisation libre
 Tous les modèles sont open source et gratuits !
 
-📊 TABLEAU RÉCAPITULATIF
+ TABLEAU RÉCAPITULATIF
 Aspect	Détail
 Utilité	Routage intelligent entre 62 LLM
 Public	Entreprises, devs, chercheurs, particuliers
